@@ -22,7 +22,6 @@ jobs:
       # gem install
       - run:
           command: |
-            gem install
             bundle install
           working_directory: ~/rails-cicd
 
