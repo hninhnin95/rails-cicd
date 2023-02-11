@@ -12,8 +12,8 @@ class ArticleTest < ActiveSupport::TestCase
 	end
 
 	test "should save article with valid parameter" do
-		article = Article.new(title: "title", body: "body of the text")
-		assert_not article.save, "should save article with valid parameter"
+		article = Article.new(title: "title", body: "")
+		assert article.save, "should save article with valid parameter"
 	end
 	
 end
