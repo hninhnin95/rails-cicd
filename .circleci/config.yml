@@ -76,7 +76,7 @@ jobs:
             time docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP:$SHA1
 workflows:
   version: 2
-  test:
+  test_build:
     jobs:
       - test_rails
       - build_and_push:
