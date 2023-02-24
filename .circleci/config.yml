@@ -74,6 +74,23 @@ jobs:
             export SHA1=$(echo ${CIRCLE_SHA1} | cut -c1-7)
             docker tag $DOCKER_IMAGE:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP:$SHA1
             time docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP:$SHA1
+            docker tag $DOCKER_IMAGE:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP:latest
+            time docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP:latest
+  deploy:
+    docker:
+      - image: circleci/python:3.7
+    steps:
+      - checkout
+      - run:
+          name: Install requirements
+          command: |
+            pip install awscli
+      - run:
+          name: Deploy!
+          shell: /bin/bash
+          command: |
+            cd elasticbeanstlk
+            eb deploy Railscicd-env
 workflows:
   version: 2
   test_build:
@@ -82,3 +99,7 @@ workflows:
       - build_and_push:
           requires:
             - test_rails
+      - deploy:
+          requires:
+            - test_rails
+            - build_and_push

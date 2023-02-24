@@ -1,0 +1,11 @@
+{
+	"AWSEBDockerrunVersion": "1",
+	"Image": {
+		"Name": "867431803138.dkr.ecr.us-east-1.amazonaws.com/rails-cicd:latest"
+	},
+	"Ports": [
+		{
+			"ContainerPort": "3000"
+		}
+	]
+}
